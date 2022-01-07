@@ -1,0 +1,1 @@
+My implementation based on Andrew Brown's course for freeCodeCamp.org - [HashiCorp Terraform Associate Certification Course](https://www.youtube.com/watch?v=V4waklkBC38&ab_channel=freeCodeCamp.org).

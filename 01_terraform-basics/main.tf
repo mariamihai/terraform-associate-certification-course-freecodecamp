@@ -12,9 +12,13 @@ provider "aws" {
   region  = "eu-west-1"
 }
 
+variable "instance_type" {
+    type = string
+}
+
 resource "aws_instance" "app_server" {
   ami           = "ami-04dd4500af104442f"
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
 
   tags = {
     Name = "ExampleAppServerInstance"

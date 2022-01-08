@@ -101,6 +101,21 @@ resource "aws_instance" "app_server" {
   #   }
   # }
 
+  # provisioner "file" {
+  #   content     = "ami used: ${self.ami}"
+  #   destination = "/home/ec2-user/file.txt"
+
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "ec2-user"
+  #     private_key = file("C:\\Users\\maria\\.ssh\\terraform")
+  #     host        = self.public_ip
+  #     # Failed to parse ssh private key: ssh: this private key is passphrase protected
+  #     # The kew needs to be unlocked by the SSH authentication agent (Check with ssh-add -L)
+  #     agent = true
+  #   }
+  # }
+
   tags = {
     Name = "ExampleAppServerInstance"
   }

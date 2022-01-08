@@ -1,11 +1,11 @@
 terraform {
-     cloud {
-       organization = "mariamihai"
+  cloud {
+    organization = "mariamihai"
 
-       workspaces {
-         name = "terraform-provisioners"
-       }
-     }
+    workspaces {
+      name = "terraform-provisioners"
+    }
+  }
 
   required_providers {
     aws = {
@@ -83,6 +83,22 @@ resource "aws_instance" "app_server" {
 
   # provisioner "local-exec" {
   #   command = "echo ${self.private_ip} >> private_ips.txt"
+  # }
+
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "echo ${self.private_ip} >> /home/ec2-user/private_ips.txt}",
+  #   ]
+
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "ec2-user"
+  #     private_key = file("C:\\Users\\maria\\.ssh\\terraform")
+  #     host        = self.public_ip
+  #     # Failed to parse ssh private key: ssh: this private key is passphrase protected
+  #     # The kew needs to be unlocked by the SSH authentication agent (Check with ssh-add -L)
+  #     agent = true
+  #   }
   # }
 
   tags = {

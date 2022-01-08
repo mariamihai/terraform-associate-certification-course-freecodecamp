@@ -1,11 +1,11 @@
 terraform {
-  cloud {
-    organization = "mariamihai"
+  # cloud {
+  #   organization = "mariamihai"
 
-    workspaces {
-      name = "terraform-provisioners"
-    }
-  }
+  #   workspaces {
+  #     name = "terraform-provisioners"
+  #   }
+  # }
 
   required_providers {
     aws = {
@@ -119,6 +119,16 @@ resource "aws_instance" "app_server" {
   tags = {
     Name = "ExampleAppServerInstance"
   }
+}
+
+resource "null_resource" "status" {
+  provisioner "local-exec" {
+    command = "aws ec2 wait instance-status-ok --instance-ids ${aws_instance.app_server.id}"
+  }
+
+  depends_on = [
+    aws_instance.app_server
+  ]
 }
 
 output "public_ip" {

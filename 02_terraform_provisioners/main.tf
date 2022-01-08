@@ -1,11 +1,11 @@
 terraform {
-  cloud {
-    organization = "mariamihai"
+     cloud {
+       organization = "mariamihai"
 
-    workspaces {
-      name = "terraform-provisioners"
-    }
-  }
+       workspaces {
+         name = "terraform-provisioners"
+       }
+     }
 
   required_providers {
     aws = {
@@ -53,7 +53,7 @@ resource "aws_security_group" "sg_app_server" {
   ]
 
   egress {
-    description = "Outgoing traffic"  
+    description      = "Outgoing traffic"
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
@@ -80,6 +80,10 @@ resource "aws_instance" "app_server" {
   key_name               = aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.sg_app_server.id]
   user_data              = data.template_file.user_data.rendered
+
+  # provisioner "local-exec" {
+  #   command = "echo ${self.private_ip} >> private_ips.txt"
+  # }
 
   tags = {
     Name = "ExampleAppServerInstance"
